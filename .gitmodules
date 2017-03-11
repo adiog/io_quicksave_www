@@ -1,0 +1,12 @@
+[submodule "deps/MathJax"]
+	path = deps/MathJax
+	url = https://github.com/mathjax/MathJax
+[submodule "deps/semantic-ui"]
+	path = deps/semantic-ui
+	url = https://github.com/Semantic-Org/Semantic-UI/
+[submodule "deps/jquery"]
+	path = deps/jquery
+	url = https://github.com/jquery/jquery
+[submodule "deps/fonts"]
+	path = deps/fonts
+	url = https://github.com/google/fonts
