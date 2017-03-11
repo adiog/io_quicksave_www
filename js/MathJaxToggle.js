@@ -1,10 +1,10 @@
 // This file is a part of quicksave project.
 // Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
-
+/*
 MathJax.Hub.Config({
     tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
-
+*/
 function hideTypeset()
 {
     var HTML = MathJax.HTML;

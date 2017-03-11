@@ -31,7 +31,6 @@ var json_post = function (url, parameters, onload_callback) {
     console.log(api_quicksave_io + url);
     request.open('POST', api_quicksave_io + url, true);
     request.onload = function () {
-      console.log(this.responseText);
         onload_callback(JSON.parse(this.responseText));
     };
     request.withCredentials = true;
