@@ -1,0 +1,15 @@
+<html>
+<link rel="shortcut icon" href="http://quicksave.io/bookmark/bookmark.png">
+<script type="text/javascript">
+function post(u,d,c) {r=new XMLHttpRequest();r.open('POST',u,true);r.onload=function (){c(JSON.parse(this.responseText));};r.send(JSON.stringify(d));}
+if(document.getSelection){s=document.getSelection();t='selection';}
+else{s='';t='page';}
+s='';
+url='http://api.quicksave.io/create/';
+ti=document.title;
+lo=location.href;
+d={'item':{'item_type':t,'title':ti,'freetext':s,'source_url':lo,'source_title':ti}};
+function n(msg) {console.log(m);}
+sc=function(data){if (data.item.item_id > 0){n('(item_id: ' + data.item.item_id + ').');}else{n('fail(' + data.message + ').');}}
+post(url,d,sc);
+</script></html>
