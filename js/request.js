@@ -2,7 +2,7 @@
 // Copyright (c) 2016 Adam Morawski <poczta@adammorawski.pl>,
 //                    Aleksander Gajewski <adiog@brainfuck.pl>.
 
-const api_quicksave_io = 'http://api.quicksave.io';
+const api_quicksave_io = 'https://api.quicksave.io';
 
 function convert_get_method_parameters_to_url_suffix(parameters)
 {

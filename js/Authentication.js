@@ -1,4 +1,4 @@
-const api_url = 'http://api.quicksave.io';
+const api_url = 'https://api.quicksave.io';
 
 function convert_get_method_parameters_to_url_suffix(parameters)
 {
@@ -65,6 +65,8 @@ function qslogout()
 
     req.send(JSON.stringify(data));
 }
+
+
 
 function Authentication()
 {

@@ -119,6 +119,7 @@ function buildButtons()
 
 function omniboxCallback(dom)
 {
+    console.log(dom.value);
     return function(){
     if (dom.value.length > 2) {
 

@@ -96,43 +96,19 @@ function LabeledIconVariantButton(icon, label, callback, style)
     }
 }
 
-function div(className)
-{
-    let dom = document.createElement('div');
-    dom.className = className;
-    return dom;
-}
 
-function input(className, type, placeHolder)
-{
-    let dom = document.createElement('input');
-    dom.className = className;
-    dom.type = type;
-    dom.placeHolder = placeHolder;
-    return dom;
-}
-
-function $$(parentNode)
-{
-    for(let i = 1; i < arguments.length; i++) {
-        parentNode.appendChild(arguments[i]);
-    }
-    return parentNode;
-}
-
-function callback(dom, eventName, unbinded_callback)
-{
-    dom.addEventListener(eventName, function(ev) {return unbinded_callback(dom)(ev);});
-    return dom;
-}
 
 function SearchBox(placeholder, searchCallback) {
-    return $$(
-        //div('ui loading search'), $$(
-        div('ui search'), $$(
-            div('ui icon input'),
-                callback(input('prompt', 'Search...', 'text'), 'keyup', searchCallback),
-                Icon('search')
+    let omni;
+    let dom =
+        $$(div({class: 'ui search'}),
+            $$(div({class: 'ui icon input'}),
+                omni = input({class: 'prompt', placeholder: 'Search...', type: 'text'}),
+                i({class: 'search icon'})
             )
         );
+    $BIND(omni, 'keyup', function (ev)  {
+        searchCallback(omni)();
+    });
+    return dom;
 }

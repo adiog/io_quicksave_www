@@ -1,1 +1,1 @@
-/io.quicksave.bootstrap/beans/jsbeans/jsbeans.js
+/io.quicksave.bootstrap/libbeans/jsbeans/jsbeans.js
