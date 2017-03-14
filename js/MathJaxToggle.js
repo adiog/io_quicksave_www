@@ -63,21 +63,12 @@ function toggleTypeset(show)
 
 function MathJaxToggle()
 {
-    toggleWrapper = document.createElement('div');
-    toggleWrapper.className = 'ui checkbox';
-    toggleWrapper.style = 'position: absolute; right: 10px; top: 10px;';
-
-    toggle = document.createElement('input');
-    toggle.type = 'checkbox';
-    toggle.checked = true;
-    toggle.addEventListener('change', function (ev) {
-        toggleTypeset(toggle.checked);
-    });
-    toggleWrapper.appendChild(toggle);
-
-    toggleLabel = document.createElement('label');
-    toggleLabel.innerHTML = 'TeX';
-    toggleWrapper.appendChild(toggleLabel);
+    toggleWrapper = $$(div({style: 'position: absolute; right: 10px; top: 10px;'}), Switch(
+        LabeledIconButton('primary button file excel outline', 'TeX'),
+        showTypeset,
+        LabeledIconButton('file outline', 'TeX'),
+        hideTypeset
+    ));
 
     document.body.appendChild(toggleWrapper);
 }

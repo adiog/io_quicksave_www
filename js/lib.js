@@ -3,19 +3,6 @@
 //                    Aleksander Gajewski <adiog@brainfuck.pl>.
 
 
-window.$ = function(selector) {
-    if (typeof(selector) == 'object') {
-        return selector;
-    }
-    var selectorType = 'querySelectorAll';
-    if (selector.indexOf('#') === 0) {
-        selectorType = 'getElementById';
-        selector = selector.substr(1, selector.length);
-    }
-    var result = document[selectorType](selector);
-    return result;
-};
-
 var fill_front_with_pattern =
 function(input_string, length_of_output_string, pattern)
 {

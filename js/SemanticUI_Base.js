@@ -47,7 +47,18 @@ function EditableText(text='', callback=null)
 function LabeledIconButton(icon, label, callback=null, style='')
 {
     let dom = document.createElement('button');
-    dom.className = 'ui labeled icon ' + style + ' button';
+
+    targetType = '';
+    uiTypes = ['primary', 'secondary', 'positive', 'negative'];
+    for(uiTypeIndex in uiTypes)
+    {
+        uiType = uiTypes[uiTypeIndex];
+        if (icon.indexOf(uiType) != -1) {
+            targetType = uiType;
+            icon = icon.replace(uiType, '');
+        }
+    }
+    dom.className = 'ui ' + targetType + ' labeled icon ' + style + ' button';
     dom.appendChild(Icon(icon));
     dom.appendChild(Text(label));
     if (callback != null)
@@ -71,8 +82,7 @@ function IconButton(icon, callback=null, style='')
 
 function InlineLoader()
 {
-    let dom = Button('loader');
-    //dom.appendChild(div('ui mini active inline loader'));
+    let dom = div({class: 'ui mini active inline loader'});
     return dom;
 }
 
@@ -96,7 +106,35 @@ function LabeledIconVariantButton(icon, label, callback, style)
     }
 }
 
+function Toggle(startNode, otherNode, toggleNodeCallback)
+{
+    $BIND(startNode, 'click', function () {
+        startNode.parentNode.replaceChild(otherNode, startNode);
+        toggleNodeCallback();
+    });
 
+    $BIND(otherNode, 'click', function () {
+        otherNode.parentNode.replaceChild(startNode, otherNode);
+        toggleNodeCallback();
+    });
+
+    return startNode;
+}
+
+function Switch(startNode, startNodeCallback, otherNode, otherNodeCallback)
+{
+    $BIND(startNode, 'click', function () {
+        startNode.parentNode.replaceChild(otherNode, startNode);
+        otherNodeCallback();
+    });
+
+    $BIND(otherNode, 'click', function () {
+        otherNode.parentNode.replaceChild(startNode, otherNode);
+        startNodeCallback();
+    });
+
+    return startNode;
+}
 
 function SearchBox(placeholder, searchCallback) {
     let omni;
