@@ -61,9 +61,9 @@ const API = {
     },
 
     item_update:
-    function()
+    function(item, succesCallback)
     {
-        //todo
+        json_post_api('/item/update/', {item: item}, succesCallback);
     },
 
     item_delete:
@@ -79,9 +79,9 @@ const API = {
     },
 
     tag_update:
-    function()
+    function(tag, successCallback)
     {
-
+        json_post_api('/tag/update/', {'tag': tag}, successCallback);
     },
 
     tag_delete:

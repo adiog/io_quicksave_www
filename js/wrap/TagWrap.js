@@ -88,11 +88,11 @@ class Tag
 
         if (tag.bean.tag_id != null)
         {
-            json_post('/tag/update/', data, function(reply) {console.log(reply)});
+            API.tag_update(tag.bean, function(reply) {console.log(reply)});
         }
         else
         {
-            json_post('/tag/create/', data, function(reply) { tag.bean.tag_id = reply['id']; console.log(reply)});
+            API.tag_update(tag.bean, function(reply) {tag.bean.tag_id = reply['id']; console.log(reply)});
         }
     }
 

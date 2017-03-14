@@ -1,10 +1,29 @@
 // This file is a part of quicksave project.
 // Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
 
-function ViewSidebar() {
-    document.body.appendChild($$(div({style: 'position: absolute; left: 10px; top: 30px;'}), Toggle(
+function ViewSidebarToggle(sidebar) {
+    return Toggle(
         LabeledIconButton('primary button content', 'Views'),
-        LabeledIconButton('content', 'Views'),
-        function() {$('#menu').sidebar('toggle');}
-    )));
+        LabeledIconButton('primary button content', 'Views'),
+        function() {$(sidebar).sidebar('toggle');}
+    );
+}
+
+function ViewMenu()
+{
+    return div({class: 'ui fixed sticky clearing segment', style: 'left: 10px; top: 10px;'});
+}
+
+function LoginSidebarToggle(sidebar)
+{
+    return Toggle(
+        LabeledIconButton('primary button content', 'Menu'),
+        LabeledIconButton('primary button content', 'Menu'),
+        function() {$(sidebar).sidebar('toggle');}
+    );
+}
+
+function ConfigMenu()
+{
+    return div({class: 'ui fixed sticky clearing segment', style: 'right: 10px; top: 10px;'});
 }

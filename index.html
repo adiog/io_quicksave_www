@@ -36,34 +36,29 @@
     <script type="text/javascript" src="/js/HTML.js"></script>
 
 
-    <script type="text/x-mathjax-config">
-         MathJax.Hub.Config({
-           extensions: ["tex2jax.js"],
-           jax: ["input/TeX","output/SVG"],
-           tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
-         });
-       </script>
-
-    <script type="text/javascript" src="/js/MathJaxConfig.js"></script>
-
+    <script type="text/javascript" src="/mathjax/MathJax.js"></script>
     <script type="text/javascript" src="/js/MathJaxToggle.js"></script>
-    <script type="text/javascript" async src="/mathjax/MathJax.js"></script>
 
 
+    <link rel="stylesheet" type="text/css" href="deps/code-prettify/src/prettify.css">
+    <script type="text/javascript" src="deps/code-prettify/src/prettify.js"></script>
+    <script type="text/javascript" src="/js/PrettyPrintToggle.js"></script>
 
 
     <script type="text/javascript" src="/js/LocalStorage_Browser.js"></script>
-    <script type="text/javascript" src="/js/Authentication.js"></script>
 
     <script type="text/javascript" src="/js/SemanticUI_Base.js"></script>
     <script type="text/javascript" src="/js/SemanticUI_BaseTransform.js"></script>
     <script type="text/javascript" src="/js/SemanticUI_Extra_DelayAction.js"></script>
     <script type="text/javascript" src="/js/SemanticUI_Extra_LoginForm.js"></script>
-    <script type="text/javascript" src="/js/SemanticUI_Extra_LoginSidebar.js"></script>
+    <script type="text/javascript" src="/js/SemanticUI_Extra_ConfigSidebar.js"></script>
+    <script type="text/javascript" src="/js/SemanticUI_Extra_ViewSidebar.js"></script>
     <script type="text/javascript" src="/js/SemanticUI_Extra_Menu.js"></script>
 
     <script type="text/javascript" src="/js/plugin/PluginEngine.js"></script>
+    <script type="text/javascript" src="/js/plugin/plugins/Git.js"></script>
     <script type="text/javascript" src="/js/plugin/plugins/MP4.js"></script>
+    <script type="text/javascript" src="/js/plugin/plugins/SourceCpp.js"></script>
     <script type="text/javascript" src="/js/plugin/plugins/Wikipedia.js"></script>
     <script type="text/javascript" src="/js/plugin/plugins/YouTube.js"></script>
 
@@ -91,46 +86,9 @@
     <script type="text/javascript" src="/js/renderer/table.js"></script>
     <script type="text/javascript" src="/js/renderer/thumbs.js"></script>
 
+    <script type="text/javascript" src="/js/main.js"></script>
 </head>
 
-<body onload="main(); MathJaxToggle(); LoginSidebar(); ViewSidebar();">
-<div id='menu' class="ui left vertical inverted labeled icon sidebar menu">
-    <a class="item">
-        <i class="home icon"></i>
-        Home
-    </a>
-    <a class="item">
-        <i class="block layout icon"></i>
-        Topics
-    </a>
-    <a class="item">
-        <i class="smile icon"></i>
-        Friends
-    </a>
-    <a class="item">
-        <i class="calendar icon"></i>
-        History
-    </a>
-    <a class="item">
-        <i class="mail icon"></i>
-        Messages
-    </a>
-    <a class="item">
-        <i class="chat icon"></i>
-        Discussions
-    </a>
-    <a class="item">
-        <i class="trophy icon"></i>
-        Achievements
-    </a>
-    <a class="item">
-        <i class="shop icon"></i>
-        Store
-    </a>
-    <a class="item">
-        <i class="settings icon"></i>
-        Settings
-    </a>
-</div>
+<body onload="main();">
 </body>
 </html>

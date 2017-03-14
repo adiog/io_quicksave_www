@@ -195,7 +195,7 @@ function initializeDocument()
     //document.addEventListener("contextmenu", function(e) { e.preventDefault(); }, false);
 }
 
-function main()
+function qsmain()
 {
     resetConfig();
 //    restoreConfig();
@@ -272,7 +272,7 @@ function displayOutput()
     //$('#pagination').addEventListener('click', function() {
     //    console.log('klik');
     //})
-
+    showPrettyPrint();
 }
 
 function updateOutput() {

@@ -23,8 +23,8 @@ class RichItemDom
         this.richItem = richItem;
 
         this.dom = document.createElement('div');
-        this.dom.className = 'richItem';
-
+        this.dom.className = 'ui center segment';
+        this.dom.style = 'width: 70%; margin: 20px auto;';
         this.icon = document.createElement('div');
         this.icon.style.overflow = 'hidden'
         this.dom.appendChild(this.icon);
@@ -101,6 +101,10 @@ class RichItem
             this.tags.push(tag);
             this.dom.add_tag(tag.dom.get());
         }
+        hidePrettyPrint();
+
+        showPrettyPrint();
+
     }
 
     static addtag(richItem)

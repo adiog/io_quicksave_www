@@ -10,3 +10,6 @@
 [submodule "deps/fonts"]
 	path = deps/fonts
 	url = https://github.com/google/fonts
+[submodule "deps/code-prettify"]
+	path = deps/code-prettify
+	url = https://github.com/google/code-prettify

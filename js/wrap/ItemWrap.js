@@ -85,11 +85,11 @@ class Item
 
         if (item.bean.item_id != null)
         {
-            json_post('/item/update/', data, function(reply) {console.log(reply)});
+            API.item_update(item.bean, function(reply) {console.log(reply)});
         }
         else
         {
-            json_post('/item/create/', data, function(reply) { item.bean.item_id = reply['id']; console.log(reply)});
+            alert('messed up!');
         }
     }
 }

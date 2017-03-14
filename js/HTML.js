@@ -62,3 +62,13 @@ function label(attrs)
 {
     return $DOM('label', attrs);
 }
+
+function pre(attrs)
+{
+    return $DOM('pre', attrs);
+}
+
+function br(attrs)
+{
+    return $DOM('br', attrs);
+}

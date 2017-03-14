@@ -3,15 +3,17 @@
 
 function LoginForm() {
     loggedDom = LabeledIconButton('negative sign out', 'Logout');
-
+var userDom;
 function statusSuccessCallback(response)
 {
     passwordDom.value = '';
     if (response.message != 'not authenticated') {
         usernameDom.value = response.message;
+        userDom = LabeledIconButton('user', response.message);
         if (notLoggedDom.parentNode)
         notLoggedDom.parentNode.replaceChild(loggedDom, notLoggedDom);
         passwordDom.placeholder = 'logged succesfully';
+        loginPassword.parentNode.replaceChild(userDom, loginPassword);
     }
     else
     {
@@ -23,6 +25,7 @@ function logoutSuccessCallback()
     if (loggedDom.parentNode)
     loggedDom.parentNode.replaceChild(notLoggedDom, loggedDom);
     passwordDom.placeholder = 'password..';
+    userDom.parentNode.replaceChild(loginPassword, userDom);
 }
 
 function statusCheck()
@@ -57,9 +60,10 @@ function logoutCallback()
     let formDom =
         $$(div({style: 'padding: 10px;'}), $$(form({class: 'ui form segment'}),
             $$(div({class: 'field'}),
-                $$$(label(), 'api.quicksave.io:'),
+                $$$(label(), 'API url'),
                 apiDom = input({type: 'text'})
             ),
+            loginPassword = $$(div(),
             $$(div({class: 'field'}),
                 $$$(label(), 'Username'),
                 usernameDom = input({placeholder: 'username', name: 'username', type: 'text'})
@@ -67,7 +71,7 @@ function logoutCallback()
             $$(div({class: 'field'}),
                 $$$(label(), 'Password'),
                 passwordDom = input({placeholder: 'password', name: 'password', type: 'password'})
-            )),
+            ))),
             $$(div({style: 'text-align: center;'}),
                 notLoggedDom = LabeledIconButton('sign in primary', 'Login'),
                 notificationArea = div()

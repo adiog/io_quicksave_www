@@ -1,10 +1,12 @@
 // This file is a part of quicksave project.
 // Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
-/*
+
 MathJax.Hub.Config({
-    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
 });
-*/
+
 function hideTypeset()
 {
     var HTML = MathJax.HTML;
@@ -63,12 +65,10 @@ function toggleTypeset(show)
 
 function MathJaxToggle()
 {
-    toggleWrapper = $$(div({style: 'position: absolute; right: 10px; top: 10px;'}), Switch(
+    return Switch(
         LabeledIconButton('primary button file excel outline', 'TeX'),
         showTypeset,
         LabeledIconButton('file outline', 'TeX'),
         hideTypeset
-    ));
-
-    document.body.appendChild(toggleWrapper);
+    );
 }
