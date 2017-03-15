@@ -148,7 +148,7 @@ function buildRefineSearchOmnibox()
     if (typeof config.filters.omni != "undefined") {
         initValue = config.filters.omni;
     }
-    refineSearchOmnibox = SearchBox('Search...', omniboxCallback);
+    refineSearchOmnibox = $$(Segment({style: 'width: 50%; margin: 20px auto;'}), SearchBox('Search...', omniboxCallback));
 
 
     return refineSearchOmnibox;

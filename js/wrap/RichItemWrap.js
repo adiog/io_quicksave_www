@@ -1,41 +1,36 @@
 // This file is a part of quicksave project.
 // Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
 
-function ItemMenuDom(item)
+function RichItemDom(richItem)
 {
-    dom = document.createElement('div');
+    return $$(Segment({style: 'width: 70%; margin: 20px auto;'}),
+                $$(Segment({style: 'overflow: hidden'}),
+                    richItem.icon = Left(div({style: 'overflow: hidden'})),
+                    richItem.title = EditableText(richItem.itemBean.title)
+                ),
+                $$(Segment(),
+                    richItem.freetext = EditableText(richItem.itemBean.freetext)
+                ),
+                richItem.pluginSegment = div(),
+                $$(Segment(), richItem.tagSegment = $$(div({class: 'ui center aligned container', style: 'overflow: hidden; display: none;'}))),
+                $$(Segment({style: 'overflow: hidden'}),
+                    Right(IconButton('trash', function(ev) {RichItem.remove(item);}, 'negative')),
+                    Right(IconButton('hashtag', function(ev) {RichItem.addtag(richItem);})),
+                    Right(richItem.delayAction.dom)
+                )
+            );
 
-    dom.appendChild(Right(IconButton('trash', function(ev) {RichItem.remove(item);}, 'negative')));
-    dom.appendChild(Right(IconButton('hashtag', function(ev) {RichItem.addtag(item);})));
-    dom.appendChild(Right(IconButton('asterisk', function(ev) {item.delayAction.restart();})));
-    dom.appendChild(Right(item.delayAction.dom));
 
-    dom.style.overflow = 'hidden';
-    return dom;
-}
 
-class RichItemDom
-{
-    constructor(richItem)
-    {
-        this.uuid = UUID();
-
-        this.richItem = richItem;
-
-        this.dom = document.createElement('div');
-        this.dom.className = 'ui center segment';
-        this.dom.style = 'width: 70%; margin: 20px auto;';
-        this.icon = document.createElement('div');
-        this.icon.style.overflow = 'hidden'
+    /*
+        //dom.style.overflow = 'hidden';
+        //return dom;
         this.dom.appendChild(this.icon);
 
         this.item = document.createElement('div');
         this.item.className = 'content';
 
-        this.tags = document.createElement('div');
 
-        this.display = document.createElement('div');
-        this.dom.appendChild(this.display);
 
 
 
@@ -44,50 +39,45 @@ class RichItemDom
 
 
         this.menu = ItemMenuDom(richItem);
-        this.dom.appendChild(this.menu);
-    }
-
-    get()
-    {
-        return this.dom;
-    }
-
-    set_icon(icon) {
-        this.icon.appendChild(icon);
-    }
-
-    set_display(dom_display)
-    {
-        this.display.appendChild(dom_display);
-    }
-
-    set_item(item) {
-        this.item.appendChild(item);
-    }
-
-    add_tag(tag) {
-        this.tags.appendChild(tag);
-    }
+        this.dom.appendChild(this.menu);*/
 }
 
-class RichItem
-{
-    constructor(richItemBean)
-    {
+class RichItem {
+    constructor(richItemBean) {
         //super();
-        this.bean = richItemBean;
+
+        let item = this;
+        this.richItemBean = richItemBean;
+        this.itemBean = richItemBean.item;
 
         this.plugin = pluginEngine.matchPlugin(this);
 
-        this.delayAction = new DelayAction(
-            'checkmark', 'Save', function(){console.log('success');},
-            'undo', 'Undo', function(){console.log('cancel');}
-        );
-        this.dom = new RichItemDom(this);
-        this.dom.dom.style.overflow = 'hidden';
-        this.dom.set_icon(Left(this.plugin.icon(this)));
 
-        this.dom.set_display(this.plugin.display(this));
+        this.delayAction = new DelayAction(
+            'checkmark', 'Save', function () {
+                RichItem.do_update(item)
+            },
+            'undo', 'Undo', function () {
+                RichItem.do_revert(item)
+
+            }
+        );
+
+        this.dom = RichItemDom(this);
+        this.icon.appendChild(this.plugin.icon(this));
+        this.title.class = this.title.class + ' middle aligned content';
+
+        this.title.addEventListener('keyup', function(ev){RichItem.update(item);});
+        this.freetext.addEventListener('keyup', function(ev){RichItem.update(item);});
+
+        let pluginSegmentContent = this.plugin.display(this);
+        if (pluginSegmentContent) {
+            this.pluginSegment.appendChild($$(Segment(), pluginSegmentContent));
+        }
+        /*this.dom.dom.;
+
+
+
 
         this.item = new Item(richItemBean.item);
         this.dom.set_item(this.item.dom.get());
@@ -95,8 +85,7 @@ class RichItem
         this.plugin.menu(this, this.dom.menu);
 
         this.tags = new Array();
-        for(var indexTag in richItemBean.tags)
-        {
+        for (var indexTag in richItemBean.tags) {
             let tag = new Tag(richItemBean.tags[indexTag]);
             this.tags.push(tag);
             this.dom.add_tag(tag.dom.get());
@@ -104,28 +93,59 @@ class RichItem
         hidePrettyPrint();
 
         showPrettyPrint();
-
+        */
     }
 
-    static addtag(richItem)
-    {
+    static addtag(richItem) {
         console.log('adding tag');
-        let tag = new Tag({'user_id': richItem.bean.item.user_id, 'item_id': richItem.bean.item.item_id, 'name': 'newtag', value: 'value'});
+        let tag = new Tag({
+            'user_id': richItem.itemBean.user_id,
+            'item_id': richItem.itemBean.item_id,
+            'name': 'newtag',
+            'value': ''
+        });
         //this.tags.push(tag);
-        richItem.dom.add_tag(tag.dom.get());
+        richItem.tagSegment.style.display = 'block';
+        richItem.tagSegment.appendChild(tag.dom);
     }
 
-    static remove(richItem)
-    {
-        richItem.delayAction.stop();
-        richItem.dom.get().parentNode.removeChild(richItem.dom.get());
+    static remove(richItem) {
+        //richItem.delayAction.stop();
+        //richItem.dom.get().parentNode.removeChild(richItem.dom.get());
         data = {item_id: richItem.bean.item.item_id};
-        json_post('/item/delete/', data, function(reply) {console.log(reply)});
+        json_post('/item/delete/', data, function (reply) {
+            console.log(reply)
+        });
     }
 
-    hasTag(tagName)
-    {
+    hasTag(tagName) {
         console.log(tagName);
-        return this.bean.tags.some(function(tag) {return tag.name == tagName});
+        return this.richItemBean.tags.some(function (tag) {
+            return tag.name == tagName
+        });
+    }
+
+    static do_update(item) {
+        item.itemBean.title = item.title.innerHTML;
+        //item.bean.item_type = item.dom.get_item_type();
+        item.itemBean.freetext = item.freetext.innerHTML;
+
+        API.item_update(item.itemBean, function (reply) {
+                console.log(reply)
+            });
+    }
+
+    static do_revert(item) {
+        item.title.innerHTML = item.itemBean.title;
+        item.freetext.innerHTML = item.itemBean.freetext;
+
+        API.item_update(item.itemBean, function (reply) {
+            console.log(reply)
+        });
+    }
+
+    static update(item)
+    {
+        item.delayAction.restart();
     }
 }

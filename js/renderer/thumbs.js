@@ -30,7 +30,7 @@ var thumbs_renderer = function()
     {
         var i = document.createElement('div');
         let richItem = new RichItem(item_json);
-        i.appendChild(richItem.dom.get());
+        i.appendChild(richItem.dom);
         /*
         var item_dom = document.createElement('div');
         var bottom = document.createElement('div');

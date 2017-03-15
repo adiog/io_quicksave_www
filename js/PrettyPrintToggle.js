@@ -7,6 +7,7 @@ function hidePrettyPrint()
         function()
         {
             this.className = this.className.replace(/\ *prettyprinted/, '');
+            this.style.backgroundColor = 'white';
             children = $(this.parentNode).children('.PrettyPrint_Preview');
             console.log(children);
             if(children.length == 1) {
@@ -23,6 +24,7 @@ function showPrettyPrint()
     $('pre').each(
         function()
         {
+            this.style.backgroundColor = '#333';
             this.parentNode.appendChild($$$(div({class: 'PrettyPrint_Preview', style: 'display: none;'}), this.innerHTML));
         }
     );

@@ -32,6 +32,10 @@ function $BIND(dom, eventName, callback)
     return dom;
 }
 
+function $SWAP(oldNode, newNode)
+{
+    oldNode.parentNode.replaceChild(newNode, oldNode);
+}
 
 function div(attrs)
 {

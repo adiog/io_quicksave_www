@@ -28,12 +28,27 @@ function Text(text)
     return document.createTextNode(text);
 }
 
+function Segment(attrs={})
+{
+    attrs['class'] = 'ui center segment';
+    return div(attrs);
+}
+
+function CompactSegment(attrs={})
+{
+    attrs['class'] = 'ui compact segment';
+    return div(attrs);
+}
+
+function FloatedSegment(attrs={})
+{
+    attrs['class'] = 'ui center aligned compact segment';
+    return div(attrs);
+}
+
 function EditableText(text='', callback=null)
 {
-    dom = document.createElement('div');
-    dom.contentEditable = true;
-    dom.className = 'dotted';
-    dom.innerHTML = text;
+    dom = $$$(div({contentEditable: true}), text);
     if (callback != null)
     {
         dom.addEventListener('blur', callback);
@@ -71,7 +86,17 @@ function LabeledIconButton(icon, label, callback=null, style='')
 function IconButton(icon, callback=null, style='')
 {
     let dom = document.createElement('button');
-    dom.className = 'ui icon ' + style + ' button';
+    targetType = '';
+    uiTypes = ['primary', 'secondary', 'positive', 'negative'];
+    for(uiTypeIndex in uiTypes)
+    {
+        uiType = uiTypes[uiTypeIndex];
+        if (icon.indexOf(uiType) != -1) {
+            targetType = uiType;
+            icon = icon.replace(uiType, '');
+        }
+    }
+    dom.className = 'ui ' + targetType + ' icon ' + style + ' button';
     dom.appendChild(Icon(icon));
     if (callback != null)
     {
@@ -139,9 +164,9 @@ function Switch(startNode, startNodeCallback, otherNode, otherNodeCallback)
 function SearchBox(placeholder, searchCallback) {
     let omni;
     let dom =
-        $$(div({class: 'ui search'}),
-            $$(div({class: 'ui icon input'}),
-                omni = input({class: 'prompt', placeholder: 'Search...', type: 'text'}),
+        $$(div({class: 'ui search center aligned', style: 'text-align: center;'}),
+            $$(div({class: 'ui icon input', style: 'margin: auto;'}),
+                omni = input({class: 'prompt', placeholder: 'Type QSQL query...', type: 'text', size: 100}),
                 i({class: 'search icon'})
             )
         );

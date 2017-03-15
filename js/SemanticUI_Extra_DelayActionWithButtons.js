@@ -7,7 +7,7 @@ function DelayActionDom(delayAction)
 
     dom.appendChild(InlineLoader());
 
-    dom.appendChild(delayAction.notificationArea);
+    //dom.appendChild(delayAction.notificationArea);
 
     appendChild(
         dom,
