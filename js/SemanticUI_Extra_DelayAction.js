@@ -5,7 +5,7 @@ function DelayActionDom(delayAction)
 {
     var dom = document.createElement('div');
 
-    dom.appendChild(InlineLoader());
+    dom.appendChild(IconButton('ui mini active inline loader'));
 
     dom.appendChild(delayAction.notificationArea);
 

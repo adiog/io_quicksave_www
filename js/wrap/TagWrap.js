@@ -17,9 +17,9 @@ class Tag
             3000, 1000
         );
 
-        this.dom = $$(FloatedSegment(),
-            this.name = EditableText(this.tagBean.name, function(ev){Tag.update(tag);}),
-            this.menu = Left(Right(IconButton('trash', function(ev) {Tag.remove(tag);}, 'negative')))
+        this.dom = $$(Left(FloatedSegment()),
+            Left($$(FloatedSegment(), this.name = EditableText(this.tagBean.name, function(ev){Tag.update(tag);}))),
+            this.menu = Left($$(div({class: ''}), IconButton('trash', function(ev) {Tag.remove(tag);}, 'tiny negative')))
         );
 
         this.success = IconButton('checkmark positive');

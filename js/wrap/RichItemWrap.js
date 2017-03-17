@@ -12,9 +12,9 @@ function RichItemDom(richItem)
                     richItem.freetext = EditableText(richItem.itemBean.freetext)
                 ),
                 richItem.pluginSegment = div(),
-                $$(Segment(), richItem.tagSegment = $$(div({class: 'ui center aligned container', style: 'overflow: hidden; display: none;'}))),
-                $$(Segment({style: 'overflow: hidden'}),
-                    Right(IconButton('trash', function(ev) {RichItem.remove(item);}, 'negative')),
+                richItem.tagSegmentWrap = $$(Segment({style: 'display: none;'}), richItem.tagSegment = $$(div({class: 'ui container', style: 'text-align: center; overflow: hidden;'}))),
+                richItem.menu = $$(Segment({style: 'overflow: hidden'}),
+                    Right(IconBasicButton('trash', function(ev) {RichItem.remove(item);}, 'negative')),
                     Right(IconButton('hashtag', function(ev) {RichItem.addtag(richItem);})),
                     Right(richItem.delayAction.dom)
                 )
@@ -74,6 +74,8 @@ class RichItem {
         if (pluginSegmentContent) {
             this.pluginSegment.appendChild($$(Segment(), pluginSegmentContent));
         }
+
+        this.plugin.menu(this, this.menu);
         /*this.dom.dom.;
 
 
@@ -105,7 +107,7 @@ class RichItem {
             'value': ''
         });
         //this.tags.push(tag);
-        richItem.tagSegment.style.display = 'block';
+        richItem.tagSegmentWrap.style.display = 'block';
         richItem.tagSegment.appendChild(tag.dom);
     }
 

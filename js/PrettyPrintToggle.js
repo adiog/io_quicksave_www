@@ -34,9 +34,9 @@ function showPrettyPrint()
 function PrettyPrintToggle()
 {
     return Switch(
-        LabeledIconButton('primary button file excel outline', 'Code'),
+        LabeledIconButton('primary file excel outline basic', 'Code'),
         showPrettyPrint,
-        LabeledIconButton('file outline', 'Code'),
+        LabeledIconButton('file outline basic', 'Code'),
         hidePrettyPrint
     );
 }

@@ -135,7 +135,13 @@ function omniboxCallback(dom)
             dom.style.border = '3px solid red';
         }
 
-    } else if (typeof config.filters.omni != "undefined") {
+    }
+    else if (dom.value.length == 0)
+    {
+        dom.style.border = '1px solid green';
+        API.retrieve(process_response, "WHERE freetext match ''");
+    }
+     else if (typeof config.filters.omni != "undefined") {
         delete config.filters.omni;
         updateOutput();
     }

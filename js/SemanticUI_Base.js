@@ -30,7 +30,7 @@ function Text(text)
 
 function Segment(attrs={})
 {
-    attrs['class'] = 'ui center segment';
+    attrs['class'] = 'ui center aligned segment middle aligned content';
     return div(attrs);
 }
 
@@ -42,7 +42,7 @@ function CompactSegment(attrs={})
 
 function FloatedSegment(attrs={})
 {
-    attrs['class'] = 'ui center aligned compact segment';
+    attrs['class'] = 'ui left floated compact segment';
     return div(attrs);
 }
 
@@ -97,6 +97,29 @@ function IconButton(icon, callback=null, style='')
         }
     }
     dom.className = 'ui ' + targetType + ' icon ' + style + ' button';
+    dom.appendChild(Icon(icon));
+    if (callback != null)
+    {
+        dom.addEventListener('click', callback);
+    }
+    return dom;
+}
+
+function IconBasicButton(icon, callback=null, style='')
+{
+    let dom = document.createElement('button');
+    targetType = '';
+    uiTypes = ['primary', 'secondary', 'positive', 'negative'];
+    for(uiTypeIndex in uiTypes)
+    {
+        uiType = uiTypes[uiTypeIndex];
+        if (icon.indexOf(uiType) != -1) {
+            targetType = uiType;
+            icon = icon.replace(uiType, '');
+        }
+    }
+    targetType = '';
+    dom.className = 'ui ' + targetType + ' icon ' + style + ' basic button';
     dom.appendChild(Icon(icon));
     if (callback != null)
     {

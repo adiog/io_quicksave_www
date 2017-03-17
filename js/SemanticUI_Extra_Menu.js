@@ -3,8 +3,8 @@
 
 function ViewSidebarToggle(sidebar) {
     return Toggle(
-        LabeledIconButton('primary button content', 'Views'),
-        LabeledIconButton('primary button content', 'Views'),
+        LabeledIconButton('primary basic button content', 'Views'),
+        LabeledIconButton('primary basic button content', 'Views'),
         function() {$(sidebar).sidebar('toggle');}
     );
 }
@@ -17,8 +17,8 @@ function ViewMenu()
 function LoginSidebarToggle(sidebar)
 {
     return Toggle(
-        LabeledIconButton('primary button content', 'Menu'),
-        LabeledIconButton('primary button content', 'Menu'),
+        LabeledIconButton('primary basic button content', 'Menu'),
+        LabeledIconButton('primary basic button content', 'Menu'),
         function() {$(sidebar).sidebar('toggle');}
     );
 }
