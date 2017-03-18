@@ -76,3 +76,8 @@ function br(attrs)
 {
     return $DOM('br', attrs);
 }
+
+function a(attrs)
+{
+    return $DOM('a', attrs);
+}

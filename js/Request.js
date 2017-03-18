@@ -3,11 +3,20 @@
 
 function convert_get_method_parameters_to_url_suffix(parameters)
 {
-    let url_suffix = '?';
+    let url_suffix = '';
 
     for(let key in parameters)
     {
-        url_suffix += key + '=' + encodeURIComponent(parameters[key]) + '&';
+        let parameter = key + '=' + encodeURIComponent(parameters[key]);
+
+        if (url_suffix == '')
+        {
+            url_suffix += '?' + parameter;
+        }
+        else
+        {
+            url_suffix += '&' + parameter;
+        }
     }
 
     return url_suffix;
@@ -18,7 +27,7 @@ function json_get(url, parameters, successCallback, failureCallback=null, errorC
     let request = new XMLHttpRequest();
     let url_with_parameters = url + convert_get_method_parameters_to_url_suffix(parameters);
 
-    request.open("POST", url_with_parameters, true);
+    request.open("GET", url_with_parameters, true);
 
     request.onload = function ()
     {
