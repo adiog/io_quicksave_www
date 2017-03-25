@@ -1,20 +1,16 @@
 // This file is a part of quicksave project.
 // Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
 
-function convert_get_method_parameters_to_url_suffix(parameters)
-{
+function convert_get_method_parameters_to_url_suffix(parameters) {
     let url_suffix = '';
 
-    for(let key in parameters)
-    {
+    for (let key in parameters) {
         let parameter = key + '=' + encodeURIComponent(parameters[key]);
 
-        if (url_suffix == '')
-        {
+        if (url_suffix == '') {
             url_suffix += '?' + parameter;
         }
-        else
-        {
+        else {
             url_suffix += '&' + parameter;
         }
     }
@@ -22,133 +18,107 @@ function convert_get_method_parameters_to_url_suffix(parameters)
     return url_suffix;
 }
 
-function json_get(url, parameters, successCallback, failureCallback=null, errorCallback=null)
+
+function requestOnLoad(request, successCallback, failureCallback)
 {
-    let request = new XMLHttpRequest();
-    let url_with_parameters = url + convert_get_method_parameters_to_url_suffix(parameters);
-
-    request.open("GET", url_with_parameters, true);
-
-    request.onload = function ()
-    {
-        if (this.status == 200)
-        {
-            successCallback(JSON.parse(this.responseText));
-        }
-        else if (failureCallback != null)
-        {
-            try
-            {
+    return function() {
+        log(request);
+        if (request.status == 200) {
+            try {
                 parsedResponseText = JSON.parse(this.responseText);
             }
-            catch (e)
-            {
+            catch (e) {
+                parsedResponseText = {'message': this.responseText};
+            }
+            successCallback(parsedResponseText);
+        }
+        else if (failureCallback != null) {
+            try {
+                parsedResponseText = JSON.parse(this.responseText);
+            }
+            catch (e) {
                 parsedResponseText = {'message': this.responseText};
             }
             failureCallback(parsedResponseText);
         }
         else {
             // silent failure
+            log('request failure suppressed onLoad');
         }
     };
+}
 
-    request.onerror = function (e)
-    {
+function requestOnError(errorCallback, failureCallback)
+{
+    return function(e) {
+        log(e);
         if (errorCallback != null)
         {
             errorCallback(e);
-        }
-    };
-
-    request.withCredentials = true;
-
-    request.send();
-}
-
-function json_post(url, parameters, successCallback, failureCallback=null, errorCallback=null)
-{
-    let request = new XMLHttpRequest();
-
-    request.open("POST", url, true);
-
-    request.onload = function ()
-    {
-        if (this.status == 200)
-        {
-            successCallback(JSON.parse(this.responseText));
         }
         else if (failureCallback != null)
         {
-            try
-            {
-                parsedResponseText = JSON.parse(this.responseText);
-            }
-            catch (e)
-            {
-                parsedResponseText = {'message': this.responseText};
-            }
-            failureCallback(parsedResponseText);
+            failureCallback(e);
         }
-        else
-        {
+        else {
             // silent failure
+            log('request failure suppressed onError');
         }
     };
-
-    request.onerror = function (e)
-    {
-        if (errorCallback != null)
-        {
-            errorCallback(e);
-        }
-    };
-
-    request.withCredentials = true;
-
-    request.send(JSON.stringify(parameters));
 }
 
-function basic_auth_json_post(username, password, url, parameters, successCallback, failureCallback=null, errorCallback=null)
-{
-    let request = new XMLHttpRequest();
-
-    request.open("POST", url, true);
-
-    request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
-
-    request.onload = function ()
-    {
-        if (this.status == 200)
+const Request = {
+    json_get:
+        function (url, parameters, successCallback, failureCallback = null, errorCallback = null)
         {
-            successCallback(JSON.parse(this.responseText));
-        }
-        else if (failureCallback != null)
-        {
-            try
-            {
-                parsedResponseText = JSON.parse(this.responseText);
-            }
-            catch (e)
-            {
-                parsedResponseText = {'message': this.responseText};
-            }
-            failureCallback(parsedResponseText);
-        }
-        else
-        {
-            // silent failure
-        }
-    };
+            let request = new XMLHttpRequest();
 
-    request.onerror = function (e)
-    {
-        if (errorCallback != null)
+            let url_with_parameters = url + convert_get_method_parameters_to_url_suffix(parameters);
+
+            request.open("GET", url_with_parameters, true);
+
+            request.onload = requestOnLoad(request, successCallback, failureCallback);
+
+            request.onerror = requestOnError(errorCallback, failureCallback);
+
+            request.withCredentials = true;
+
+            request.send();
+        },
+
+    json_post:
+        function (url, parameters, successCallback, failureCallback = null, errorCallback = null)
         {
-            errorCallback(e);
+            let request = new XMLHttpRequest();
+
+            request.open("POST", url, true);
+
+            request.onload = requestOnLoad(request, successCallback, failureCallback);
+
+            request.onerror = requestOnError(errorCallback, failureCallback);
+
+            request.withCredentials = true;
+
+            request.send(JSON.stringify(parameters));
+        },
+
+    basic_auth_json_post:
+        function (username, password, url, parameters, successCallback, failureCallback = null, errorCallback = null)
+        {
+            log(username, password, url);
+
+            let request = new XMLHttpRequest();
+
+            request.open("POST", url, true);
+
+            request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+
+            request.onload = requestOnLoad(request, successCallback, failureCallback);
+
+            request.onerror = requestOnError(errorCallback, failureCallback);
+
+            request.withCredentials = true;
+
+            request.send(JSON.stringify(parameters));
         }
-    };
-
-    request.withCredentials = true;
-
-    request.send(JSON.stringify(parameters));
-}
+};

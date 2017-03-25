@@ -17,13 +17,14 @@ class Tag
             3000, 1000
         );
 
-        this.dom = $$(Left(FloatedSegment()),
-            Left($$(FloatedSegment(), this.name = EditableText(this.tagBean.name, function(ev){Tag.update(tag);}))),
-            this.menu = Left($$(div({class: ''}), IconButton('trash', function(ev) {Tag.remove(tag);}, 'tiny negative')))
-        );
+        this.dom = $$(FloatedSegment(), $$(div({class: 'ui two column grid'}),
+            $$(div({class: 'middle aligned column'}), this.name = EditableText(this.tagBean.name, function(ev){Tag.update(tag);})),
+            //$$(div({class: 'column'}), Text(' ')),
+            $$(div({class: 'column'}), this.menu = Left($$(div({class: ''}), IconBasicButton('trash', function(ev) {Tag.remove(tag);}, 'mini negative'))))
+        ));
 
-        this.success = IconButton('checkmark positive');
-        this.loader = IconButton('ui mini active inline loader');
+        this.success = IconBasicButton('checkmark positive');
+        this.loader = IconBasicButton('ui mini active inline loader');
     }
 
     static do_update(tag)

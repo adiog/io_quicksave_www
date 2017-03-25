@@ -2,7 +2,9 @@
 // Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
 
 let default_config = {
-    'api.quicksave.io': 'https://api.quicksave.io'
+    'api.quicksave.io': 'https://api.quicksave.io',
+    'oauth.quicksave.io': 'https://oauth.quicksave.io',
+    'token': ''
 };
 
 function localStorageSetItem(key, value)

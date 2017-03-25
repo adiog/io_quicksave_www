@@ -17,8 +17,8 @@ function ViewMenu()
 function LoginSidebarToggle(sidebar)
 {
     return Toggle(
-        LabeledIconButton('primary basic button content', 'Menu'),
-        LabeledIconButton('primary basic button content', 'Menu'),
+        LabeledIconButton('secondary basic button setting', 'Config'),
+        LabeledIconButton('secondary basic button setting', 'Config'),
         function() {$(sidebar).sidebar('toggle');}
     );
 }
@@ -26,4 +26,15 @@ function LoginSidebarToggle(sidebar)
 function ConfigMenu()
 {
     return div({class: 'ui fixed sticky clearing segment', style: 'right: 10px; top: 10px;'});
+}
+
+function LogoutMenu()
+{
+    return div({class: 'ui fixed sticky clearing segment', style: 'right: 10px; bottom: 10px;'});
+}
+
+
+function LoginMenu()
+{
+    return div({class: 'ui fixed sticky clearing segment', style: 'right: 10px; bottom: 10px;'});
 }

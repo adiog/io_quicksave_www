@@ -12,10 +12,10 @@ function RichItemDom(richItem)
                     richItem.freetext = EditableText(richItem.itemBean.freetext)
                 ),
                 richItem.pluginSegment = div(),
-                richItem.tagSegmentWrap = $$(Segment({style: 'display: none;'}), richItem.tagSegment = $$(div({class: 'ui container', style: 'text-align: center; overflow: hidden;'}))),
+                richItem.tagSegmentWrap = $$(ClearingSegment({style: 'display: none;'}), richItem.tagSegment = $$(div({class: 'ui container', style: 'text-align: center; overflow: hidden;'}))),
                 richItem.menu = $$(Segment({style: 'overflow: hidden'}),
-                    Right(IconBasicButton('trash', function(ev) {RichItem.remove(item);}, 'negative')),
-                    Right(IconButton('hashtag', function(ev) {RichItem.addtag(richItem);})),
+                    Right(IconBasicButton('trash', function(ev) {RichItem.remove(richItem);}, 'negative')),
+                    Right(IconBasicButton('secondary hashtag', function(ev) {RichItem.addtag(richItem);})),
                     Right(richItem.delayAction.dom)
                 )
             );
@@ -76,6 +76,13 @@ class RichItem {
         }
 
         this.plugin.menu(this, this.menu);
+
+        for (let tagIndex in richItemBean.tags) {
+            let tag = new Tag(richItemBean.tags[tagIndex]);
+            this.tagSegmentWrap.style.display = 'block';
+            this.tagSegment.appendChild(tag.dom);
+        }
+
         /*this.dom.dom.;
 
 
@@ -112,18 +119,54 @@ class RichItem {
     }
 
     static remove(richItem) {
-        //richItem.delayAction.stop();
-        //richItem.dom.get().parentNode.removeChild(richItem.dom.get());
-        data = {item_id: richItem.bean.item.item_id};
-        json_post('/item/delete/', data, function (reply) {
-            console.log(reply)
+
+        console.log('try to remove');
+
+        let trash;
+        let cancel;
+
+        let confirm = $$(div({class: 'ui basic modal'}),
+            $$(div({class: 'ui icon header'}),
+                i({class: 'trash icon'}),
+                Text('Remove item')
+            ),
+            $$(div({class: 'content'}),
+                $$$(p(), 'Are you sure you want to delete the item?')
+            ),
+            $$(div({class: 'actions'}),
+                cancel = $$(div({class: 'ui green basic inverted button'}),
+                    i({class: 'cancel icon'}),
+                    Text('No')
+                ),
+                trash = $$(div({class: 'ui red inverted button'}),
+                    i({class: 'trash icon'}),
+                    Text('Yes')
+                )
+            )
+        );
+
+        document.body.appendChild(confirm);
+        $(confirm).modal('show');
+
+        $BIND(trash, 'click', function() {
+            let item_id = richItem.richItemBean.item.item_id;
+            API.item_delete(item_id, function (reply) {
+                $(confirm).modal('hide');
+                confirm.parentNode.removeChild(confirm);
+                richItem.dom.parentNode.removeChild(richItem.dom);
+            });
+        });
+
+        $BIND(cancel, 'click', function () {
+            $(confirm).modal('hide');
+            confirm.parentNode.removeChild(confirm);
         });
     }
 
     hasTag(tagName) {
         console.log(tagName);
         return this.richItemBean.tags.some(function (tag) {
-            return tag.name == tagName
+            return tag.name === tagName;
         });
     }
 

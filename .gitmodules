@@ -13,3 +13,6 @@
 [submodule "deps/code-prettify"]
 	path = deps/code-prettify
 	url = https://github.com/google/code-prettify
+[submodule "deps/trianglify"]
+	path = deps/trianglify
+	url = https://github.com/qrohlf/trianglify

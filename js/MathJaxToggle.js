@@ -66,9 +66,9 @@ function toggleTypeset(show)
 function MathJaxToggle()
 {
     return Switch(
-        LabeledIconButton('primary button file excel outline', 'TeX'),
+        LabeledIconButton('primary button file excel outline basic', 'TeX'),
         showTypeset,
-        LabeledIconButton('file outline', 'TeX'),
+        LabeledIconButton('file outline basic', 'TeX'),
         hideTypeset
     );
 }

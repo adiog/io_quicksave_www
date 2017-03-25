@@ -17,7 +17,7 @@ function DelayActionDom(delayAction)
             function (ev) {
                 delayAction.doSuccessCallback()
             },
-            'primary'
+            'primary basic'
         )
     );
 
@@ -29,7 +29,7 @@ function DelayActionDom(delayAction)
             function (ev) {
                 delayAction.doCancelCallback();
             },
-            'secondary'
+            'secondary basic outline'
         )
     );
 

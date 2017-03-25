@@ -5,31 +5,31 @@ function DelayActionDom(delayAction)
 {
     var dom = document.createElement('div');
 
-    dom.appendChild(IconButton('ui mini active inline loader'));
+    dom.appendChild(IconButton('ui mini active inline loader basic'));
 
     dom.appendChild(delayAction.notificationArea);
 
     appendChild(
         dom,
         LabeledIconVariantButton(
-            delayAction.successIcon,
+            delayAction.successIcon + ' positive outline basic',
             delayAction.successLabel,
             function (ev) {
                 delayAction.doSuccessCallback()
             },
-            'primary'
+            ''
         )
     );
 
     appendChild(
         dom,
         LabeledIconVariantButton(
-            delayAction.cancelIcon,
+            delayAction.cancelIcon  + ' secondary outline basic',
             delayAction.cancelLabel,
             function (ev) {
                 delayAction.doCancelCallback();
             },
-            'secondary'
+            ''
         )
     );
 
@@ -75,7 +75,9 @@ class DelayAction
         {
             if (this.remainingTime > 0)
             {
-                this.notificationCallback(this.notificationArea, this.remainingTime);
+                if (this.notificationCallback != null) {
+                    this.notificationCallback(this.notificationArea, this.remainingTime);
+                }
                 this.remainingTime = this.remainingTime - this.tickTime;
 
                 let delayAction = this;

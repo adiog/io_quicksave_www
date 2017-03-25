@@ -16,9 +16,9 @@ function Button(label=null, callback=null, style='')
     return dom;
 }
 
-function Icon(icon)
+function Icon(icon, attrs)
 {
-    let dom = document.createElement('i');
+    let dom = i(attrs);
     dom.className = icon + ' icon';
     return dom;
 }
@@ -34,6 +34,12 @@ function Segment(attrs={})
     return div(attrs);
 }
 
+function ClearingSegment(attrs={})
+{
+    attrs['class'] = 'ui clearing segment content';
+    return div(attrs);
+}
+
 function CompactSegment(attrs={})
 {
     attrs['class'] = 'ui compact segment';
@@ -42,7 +48,7 @@ function CompactSegment(attrs={})
 
 function FloatedSegment(attrs={})
 {
-    attrs['class'] = 'ui left floated compact segment';
+    attrs['class'] = 'ui floated compact segment';
     return div(attrs);
 }
 
@@ -64,12 +70,12 @@ function LabeledIconButton(icon, label, callback=null, style='')
     let dom = document.createElement('button');
 
     targetType = '';
-    uiTypes = ['primary', 'secondary', 'positive', 'negative'];
+    uiTypes = ['primary', 'secondary', 'positive', 'negative', 'basic'];
     for(uiTypeIndex in uiTypes)
     {
         uiType = uiTypes[uiTypeIndex];
         if (icon.indexOf(uiType) != -1) {
-            targetType = uiType;
+            targetType = targetType + ' ' + uiType;
             icon = icon.replace(uiType, '');
         }
     }
@@ -105,9 +111,9 @@ function IconButton(icon, callback=null, style='')
     return dom;
 }
 
-function IconBasicButton(icon, callback=null, style='')
+function IconBasicButton(icon, callback=null, style='', attrs={})
 {
-    let dom = document.createElement('button');
+    let dom = button(attrs);
     targetType = '';
     uiTypes = ['primary', 'secondary', 'positive', 'negative'];
     for(uiTypeIndex in uiTypes)
@@ -184,17 +190,43 @@ function Switch(startNode, startNodeCallback, otherNode, otherNodeCallback)
     return startNode;
 }
 
+function Help() {
+    let help;
+    let ret = $$(div(),
+        IconBasicButton('help', null, '', {id: 'help', 'data-content': 'Check QSQL grammar!'}),
+        div({
+            class: 'ui fluid popup top left transition hidden',
+            style: 'top: auto; left: 1px; bottom: 69.0001px; right: auto; width: 960px;'
+        })
+    );
+    $(help)
+        .popup({
+            inline     : true,
+            hoverable  : true,
+            position   : 'bottom center',
+            delay: {
+                show: 300,
+                hide: 800
+            }
+        })
+    ;
+    return ret;
+}
+
 function SearchBox(placeholder, searchCallback) {
     let omni;
+    let help;
     let dom =
-        $$(div({class: 'ui search center aligned', style: 'text-align: center;'}),
-            $$(div({class: 'ui icon input', style: 'margin: auto;'}),
-                omni = input({class: 'prompt', placeholder: 'Type QSQL query...', type: 'text', size: 100}),
+        $$(div({class: 'ui search center aligned', style: 'text-align: center; float: left; overflow: hidden;'}),
+            $$(div({class: 'ui icon input', style: 'margin: auto; float: left; overflow: hidden;'}),
+                omni = input({class: 'prompt', placeholder: 'Type QSQL query...', type: 'text', size: 80}),
                 i({class: 'search icon'})
             )
         );
     $BIND(omni, 'keyup', function (ev)  {
         searchCallback(omni)();
     });
+
+
     return dom;
 }

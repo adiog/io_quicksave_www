@@ -1,8 +1,6 @@
 // This file is a part of quicksave project.
 // Copyright (c) 2016 Aleksander Gajewski <adiog@brainfuck.pl>.
 
-var qs_url = 'http://localhost:7000/';
-
 var data = [];
 var output = [];
 
@@ -154,8 +152,7 @@ function buildRefineSearchOmnibox()
     if (typeof config.filters.omni != "undefined") {
         initValue = config.filters.omni;
     }
-    refineSearchOmnibox = $$(Segment({style: 'width: 50%; margin: 20px auto;'}), SearchBox('Search...', omniboxCallback));
-
+    refineSearchOmnibox = $$(div({class: 'ui fixed sticky'}), $$(Segment({style: 'text-align: center; overflow: auto; top: 0; margin: 20px 25% ! important; width: 50%  ! important'}), SearchBox('Search...', omniboxCallback)));
 
     return refineSearchOmnibox;
 }
@@ -172,7 +169,7 @@ function buildAdditionalNavigationButtons()
 
 function buildResultsContainer()
 {
-    return document.createElement('div');
+    return div({style: 'padding-top: 100px;'});
 }
 
 function buildLineBreak()
@@ -192,9 +189,8 @@ function buildRefineSearch()
 function initializeDocument()
 {
     resultsContainer = buildResultsContainer();
-
     //document.body.appendChild(buildButtons());
-    document.body.appendChild(buildRefineSearchOmnibox());
+    document.body.appendChild(omni = buildRefineSearchOmnibox());
     document.body.appendChild(resultsContainer);
     //document.body.appendChild(buildAdditionalNavigationButtons());
 

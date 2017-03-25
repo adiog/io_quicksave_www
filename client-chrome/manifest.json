@@ -27,6 +27,8 @@
   ],
   "background": {
      "scripts": [
+       "env.js",
+       "shared/ConsoleLog.js",
        "LocalStorage_Chrome.js",
        "shared/Request.js",
        "shared/API.js",

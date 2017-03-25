@@ -81,3 +81,8 @@ function a(attrs)
 {
     return $DOM('a', attrs);
 }
+
+function p(attrs)
+{
+    return $DOM('p', attrs);
+}

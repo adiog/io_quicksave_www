@@ -24,6 +24,7 @@ function client-chrome()
     client-chrome-link js/SemanticUI_Extra_LoginForm.js
     client-chrome-link js/API.js
     client-chrome-link js/Request.js
+    client-chrome-link js/ConsoleLog.js
 }
 
 client-chrome
