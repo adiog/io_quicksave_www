@@ -6,3 +6,7 @@
 .segment-margin {
     margin: 20px;
 }
+
+.only-signup {
+    display: none;
+}

@@ -84,6 +84,13 @@ function main_login_form()
     submitButton = document.getElementById('submit');
     submitButton.addEventListener('click', submitCallback);
 
+    signupButton = document.getElementById('signup');
+    signupButton.addEventListener('click', function () {
+       $('.only-signup').each(function(){
+           this.style.display = 'block';
+       })
+    });
+
     wip('signup');
     wip('facebook');
     wip('google');
