@@ -11,7 +11,7 @@ var table_renderer = function(renderer_layout)
     }
     else
     {
-        this.layout = ['item_id', 'title', 'freetext', 'source_title', 'source_url', 'timestamp'];
+        this.layout = ['meta_hash', 'title', 'freetext', 'source_title', 'source_url', 'timestamp'];
     }
 
     this.get_item_dom_layout =

@@ -43,9 +43,9 @@ const API = {
         },
 
     create:
-    function(item, successCallback)
+    function(meta, successCallback)
     {
-        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/create', {'item': item}, successCallback);
+        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/create', {'meta': meta}, successCallback);
     },
 
     retrieve:
@@ -54,16 +54,16 @@ const API = {
         Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/retrieve', {'query': query}, success_callback);
     },
 
-    item_update:
-    function(item, succesCallback)
+    meta_update:
+    function(meta, succesCallback)
     {
-        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/item/update', {item: item}, succesCallback);
+        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/meta/update', {meta: meta}, succesCallback);
     },
 
-    item_delete:
-    function(item_id, succesCallback)
+    meta_delete:
+    function(meta_hash, succesCallback)
     {
-        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/item/delete', {item_id: item_id}, succesCallback);
+        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/meta/delete', {meta_hash: meta_hash}, succesCallback);
     },
 
     tag_create:

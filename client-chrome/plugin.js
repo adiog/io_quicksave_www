@@ -27,15 +27,15 @@ function do_item_create_request(tab, item_type, title) {
 
     API.create(
         {
-            'item_type': item_type,
-            'title': source_title,
-            'freetext': title,
+            'meta_type': item_type,
+            'name': source_title,
+            'text': title,
             'source_url': source_url,
             'source_title': source_title
         },
         function (data) {
-            if (data.item.item_id > 0) {
-                notify_success('Item was saved (item_id: ' + data.item.item_id + ').');
+            if (data.item.meta.meta_hash) {
+                notify_success('Item was saved (meta_hash: ' + data.item.meta.meta_hash + ').');
             }
             else {
                 notify_failure('Item was not saved (' + data.message + ').');

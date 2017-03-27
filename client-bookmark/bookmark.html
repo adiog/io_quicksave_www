@@ -86,9 +86,9 @@
 
     let success_callback = function(data)
     {
-        if (data.item.item_id > 0)
+        if (data.item.meta_hash > 0)
         {
-            notify_success('Item was saved (item_id: ' + data.item.item_id + ').');
+            notify_success('Item was saved (meta_hash: ' + data.item.meta_hash + ').');
         }
         else
         {

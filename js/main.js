@@ -40,8 +40,8 @@ function main_logged()
     });
 
     qsmain();
-    //$(viewMenu).sticky();
-    $(configMenu).sticky({context: body});
+    ////$(viewMenu).sticky();
+    $(configMenu).sticky();
 
     $(omni).sticky();
 

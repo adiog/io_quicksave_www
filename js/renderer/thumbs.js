@@ -29,8 +29,8 @@ var thumbs_renderer = function()
     function(item_json, item_dom_layout)
     {
         var i = document.createElement('div');
-        let richItem = new RichItem(item_json);
-        i.appendChild(richItem.dom);
+        let ecmaItem = new EcmaItem(item_json);
+        i.appendChild(ecmaItem.dom);
         /*
         var item_dom = document.createElement('div');
         var bottom = document.createElement('div');
@@ -39,7 +39,7 @@ var thumbs_renderer = function()
         item_json = item_json['item'];
 
         //item_dom.className = 'qs_item ' + item_json.item_type;
-        item_dom.innerHTML = item_json.item_id + ': ' + item_json.title + ' [' + item_json.item_type + ']<hr/> ' + item_json.freetext + '<br/>';
+        item_dom.innerHTML = item_json.meta_hash + ': ' + item_json.title + ' [' + item_json.item_type + ']<hr/> ' + item_json.freetext + '<br/>';
         if (item_json.storage && (item_json.storage.length != 0)) {
             item_dom.innerHTML = item_dom.innerHTML + "<img width=\"500px\" src=\"/static/qs/" + item_json.storage[0].storage + "\">";
         }
@@ -54,7 +54,7 @@ var thumbs_renderer = function()
         new_tag = document.createElement('button');
         new_tag.innerHTML = 'add tag';
         new_tag.addEventListener('click', function (ev) {
-            tag = new Tag({'user_id': item_json.user_id, 'item_id': item_json.item_id, 'name': 'newtag', value: 'value'});
+            tag = new Tag({'user_hash': item_json.user_hash, 'meta_hash': item_json.meta_hash, 'name': 'newtag', value: 'value'});
             bottom.appendChild(tag.dom.get());
         });
         bottom.appendChild(new_tag);
@@ -73,7 +73,7 @@ var thumbs_renderer = function()
                 }
         }
 
-        item_dom.innerHTML = item_dom.innerHTML + ' <button onClick="api_bom_item_delete(shadow, ' + item_json.item_id + ')">Delete</button>';
+        item_dom.innerHTML = item_dom.innerHTML + ' <button onClick="api_bom_item_delete(shadow, ' + item_json.meta_hash + ')">Delete</button>';
 
         i.appendChild(item_dom);
         i.appendChild(bottom);

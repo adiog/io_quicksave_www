@@ -10,6 +10,6 @@ ti=document.title;
 lo=location.href;
 d={'item':{'item_type':t,'title':ti,'freetext':s,'source_url':lo,'source_title':ti}};
 function n(msg) {console.log(m);}
-sc=function(data){if (data.item.item_id > 0){n('(item_id: ' + data.item.item_id + ').');}else{n('fail(' + data.message + ').');}}
+sc=function(data){if (data.item.meta_hash > 0){n('(meta_hash: ' + data.item.meta_hash + ').');}else{n('fail(' + data.message + ').');}}
 post(url,d,sc);
 </script></html>

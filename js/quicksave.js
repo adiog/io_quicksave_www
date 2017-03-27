@@ -213,7 +213,7 @@ function get_tag_dom(callback, content)
 
 function print_tag(tag)
 {
-    return '<span contenteditable="true" onchange="tag_update(' + tag['tag_id'] + ')">' + tag['name'] + '</span>' + ((tag['value'] != '') ? (' [' + tag['value'] + ']' ) : '')
+    return '<span contenteditable="true" onchange="tag_update(' + tag['tag_hash'] + ')">' + tag['name'] + '</span>' + ((tag['value'] != '') ? (' [' + tag['value'] + ']' ) : '')
 }
 
 function shadow(response_json)
@@ -238,7 +238,7 @@ function displayOutput()
                 renderItemHTMLThumbnail,
                 resultsContainer); */
 
-    var itemFixedFields = ['item_id', 'title', 'freetext', 'source_title', 'source_url', 'timestamp'];
+    var itemFixedFields = ['meta_hash', 'title', 'freetext', 'source_title', 'source_url', 'timestamp'];
 
     function getHTMLTableColumns() {
     try {
