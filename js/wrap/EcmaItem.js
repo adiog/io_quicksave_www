@@ -73,8 +73,23 @@ class EcmaItem {
         if (pluginSegmentContent) {
             this.domPlug.appendChild($$(Segment(), pluginSegmentContent));
         }
+        if (itemBean.meta.meta_type == "screenshot")
+        {
+            this.itemBean.files.some(function (file) {
+                if (file.filename == "screenshot.png") {
+                    let src = env.HTTPS_CDN_QUICKSAVE_IO + '/' + ecmaItem.itemBean.meta.user_hash + '/' + ecmaItem.itemBean.meta.meta_hash + '/' + file.file_hash + '/' + file.filename;
+                    ecmaItem.domPlug.appendChild(img({src: src, class: 'sizedimg'}));
+                }
+            });
+        }
 
         this.plugin.menu(this, this.menu);
+        for (let fileIndex in this.itemBean.files)
+        {
+            let file = this.itemBean.files[fileIndex];
+            let src = env.HTTPS_CDN_QUICKSAVE_IO + '/' + ecmaItem.itemBean.meta.user_hash + '/' + ecmaItem.itemBean.meta.meta_hash + '/' + file.file_hash + '/' + file.filename;
+            this.menu.appendChild(IconBasicButton('download', function(ev){window.location=src;}));
+        }
 
         for (let tagIndex in this.item.tags) {
             let tag = new EcmaTag(this.item.tags[tagIndex]);

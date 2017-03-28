@@ -86,3 +86,8 @@ function p(attrs)
 {
     return $DOM('p', attrs);
 }
+
+function img(attrs)
+{
+    return $DOM('img', attrs)
+}

@@ -84,3 +84,10 @@ const API = {
 
     }
 };
+
+const CDN = {
+
+    token_put: function (token, successCallback, failureCallback = null) {
+        Request.json_post(env.HTTPS_CDN_QUICKSAVE_IO + '/token/put', {token: token}, successCallback, failureCallback);
+    },
+}

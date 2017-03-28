@@ -62,6 +62,12 @@ function submitSuccessCallback(response) {
     }, function () {
         console.log('not logged')
     });
+    CDN.token_put(response.token, function () {
+        console.log('logged');
+    }, function () {
+        console.log('not logged')
+    });
+
 }
 
 function submitCallback(ev) {
