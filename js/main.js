@@ -74,7 +74,10 @@ function submitCallback(ev) {
    // ev.preventDefault();
     usernameDom = document.getElementById('username');
     passwordDom = document.getElementById('password');
-    OAuth.token_get(usernameDom.value, passwordDom.value, 3600, submitSuccessCallback, function(){passwordDom.value = ''; passwordDom.placeholder = 'incorrect credentials';});
+    OAuth.token_get(usernameDom.value, passwordDom.value, 3600, submitSuccessCallback,
+        function(){passwordDom.value = ''; passwordDom.placeholder = 'incorrect credentials';},
+        function(){passwordDom.value = ''; passwordDom.placeholder = 'connection error';}
+        );
 }
 
 function wip(id)

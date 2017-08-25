@@ -1,6 +1,5 @@
 // This file is a part of quicksave project.
-// Copyright (c) 2016 Adam Morawski <poczta@adammorawski.pl>,
-//                    Aleksander Gajewski <adiog@brainfuck.pl>.
+// Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
 
 
 var fill_front_with_pattern =

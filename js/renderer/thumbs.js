@@ -1,6 +1,5 @@
 // This file is a part of quicksave project.
-// Copyright (c) 2016 Adam Morawski <poczta@adammorawski.pl>,
-//                    Aleksander Gajewski <adiog@brainfuck.pl>.
+// Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
 
 
 var thumbs_renderer = function()
@@ -21,7 +20,8 @@ var thumbs_renderer = function()
     function(container_dom_layout)
     {
         var container_dom = document.createElement('div');
-        container_dom.className = '';
+        container_dom.className = 'ui center aligned container';
+        //container_dom.style = 'width: 100%; clear: both;';
         return container_dom;
     };
 
@@ -29,8 +29,9 @@ var thumbs_renderer = function()
     function(item_json, item_dom_layout)
     {
         var i = document.createElement('div');
+        i.style = 'margin: 20px auto;';
         let ecmaItem = new EcmaItem(item_json);
-        i.appendChild(ecmaItem.dom);
+        i.appendChild(ecmaItem.domLayout);
         /*
         var item_dom = document.createElement('div');
         var bottom = document.createElement('div');
