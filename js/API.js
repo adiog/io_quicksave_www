@@ -91,4 +91,8 @@ const CDN = {
     token_put: function (token, successCallback, failureCallback = null) {
         Request.json_post(env.HTTPS_CDN_QUICKSAVE_IO + '/token/put', {token: token}, successCallback, failureCallback);
     },
+
+    url: function(metaBean, fileBean) {
+        return env.HTTPS_CDN_QUICKSAVE_IO + '/' + metaBean.user_hash + '/' + metaBean.meta_hash + '/' + fileBean.file_hash + '/' + fileBean.filename;
+    }
 };

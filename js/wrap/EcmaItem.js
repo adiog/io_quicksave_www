@@ -169,10 +169,10 @@ class EcmaItem {
             $(this.domText).hide();
         }
 
-        console.log(overlay);
+        console.log('yyy', overlay);
 
         if ((overlay !== null) && ('content' in overlay)) {
-            console.log(overlay['content']);
+            console.log('xxx', overlay['content']);
             let content = overlay.content(ecmaItem);
             if (content !== null) {
                 this.domContent.appendChild(content);
