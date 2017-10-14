@@ -6,7 +6,7 @@ cd $(dirname $0)
 
 ([[ ! -e deps/jquery/dist/jquery.min.js ]] && cd deps/jquery/ && npm run build)
 ([[ ! -e deps/semantic-ui/dist/semantic.min.js ]] && cd deps/semantic-ui/ && npm run install)
-ln -sf deps/Mathjax mathjax
+ln -sf deps/MathJax mathjax
 
 function client-chrome-link()
 {
