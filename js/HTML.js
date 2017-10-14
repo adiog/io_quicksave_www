@@ -1,5 +1,5 @@
-// This file is a part of quicksave project.
-// Copyright (c) 2017 Aleksander Gajewski <adiog@quicksave.io>.
+// This file is a part of EnkindleReader project.
+// Copyright (c) 2017 Aleksander Gajewski <adiog@brainfuck.pl>.
 
 function $DOM(elementName, elementAttributes={})
 {
@@ -120,3 +120,37 @@ function span(attrs)
     return $DOM('span', attrs);
 }
 
+function textarea(attrs)
+{
+    return $DOM('textarea', attrs);
+}
+
+function select(attrs)
+{
+    return $DOM('select', attrs);
+}
+
+function option(attrs)
+{
+    return $DOM('option', attrs);
+}
+
+function table(attrs)
+{
+    return $DOM('table', attrs);
+}
+
+function tr(attrs)
+{
+    return $DOM('tr', attrs);
+}
+
+function td(attrs)
+{
+    return $DOM('td', attrs);
+}
+
+function code(attrs)
+{
+    return $DOM('code', attrs);
+}

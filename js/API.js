@@ -54,6 +54,12 @@ const API = {
         Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/retrieve', {'query': query}, success_callback);
     },
 
+    perspective_create:
+    function(perspective, successCallback)
+    {
+        Request.json_post(env.HTTPS_API_QUICKSAVE_IO + '/perspective/create', {perspective: perspective}, successCallback);
+    },
+
     meta_update:
     function(meta, succesCallback)
     {

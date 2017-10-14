@@ -16,3 +16,6 @@
 [submodule "deps/trianglify"]
 	path = deps/trianglify
 	url = https://github.com/qrohlf/trianglify
+[submodule "deps/jquery-sortable"]
+	path = deps/jquery-sortable
+	url = https://github.com/adiog/html5sortable
