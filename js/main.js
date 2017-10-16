@@ -27,7 +27,7 @@ function main_logged()
 
     document.body.appendChild(
         configMenu = $$(LogoutMenu(),
-            LoginSidebarToggle(configSidebar), br(), br(),
+            //LoginSidebarToggle(configSidebar), br(), br(),
             logoutButton = LabeledIconButton('basic negative sign out', 'Logout')
         )
     );
