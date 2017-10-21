@@ -142,7 +142,7 @@ function LabeledIconButton(icon, label, callback=null, style='')
     return dom;
 }
 
-function IconButton(icon, callback=null, style='')
+function IconButton(icon='ban', callback=null, style='')
 {
     let dom = document.createElement('button');
     targetType = '';
@@ -164,7 +164,7 @@ function IconButton(icon, callback=null, style='')
     return dom;
 }
 
-function IconBasicButton(icon, callback=null, style='', attrs={})
+function IconBasicButton(icon='ban', callback=null, style='', attrs={})
 {
     let dom = button(attrs);
     targetType = '';
